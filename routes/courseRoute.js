@@ -47,7 +47,7 @@ route.post("/", async (req, res) => {
           .status(400);
       } else {
         res
-          .send(SendResponse(true, student, "Data Saved Successfully"))
+          .send(SendResponse(true, course, "Data Saved Successfully"))
           .status(200);
       }
     }
@@ -58,3 +58,6 @@ route.post("/", async (req, res) => {
 
 route.put("/:id", (req, res) => {});
 route.delete("/:id", (req, res) => {});
+
+
+module.exports =  route;

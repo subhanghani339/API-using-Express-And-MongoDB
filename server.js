@@ -1,8 +1,9 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 app.use(express.json())
 require("dotenv").config();
-
+app.use(cors())
 const StudentRoute = require("./routes/studentRoute")
 app.use("/api/student", StudentRoute)
 
