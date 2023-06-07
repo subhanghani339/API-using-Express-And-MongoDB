@@ -16,6 +16,9 @@ app.use("/api/institute", InstituteRoute)
 const CRoute = require("./routes/courseRoute");
 app.use("/api/course", CRoute)
 
+const UserRoute = require("./routes/userRoute");
+app.use("/api/user", UserRoute);
+
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
