@@ -56,12 +56,47 @@ route.post("/", async (req, res) => {
   }
 });
 
-route.put("/:id", (req, res) => {
-  res.send("Edit student data");
+route.put("/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    let result = await studentModel.findById(id);
+
+    if (!result) {
+      res.send(SendResponse(false, null, "No Data Found!")).status(400);
+    } else {
+      let updateResult = await studentModel.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+      if (!updateResult) {
+        res.send(SendResponse(false, null, "Error")).status(404);
+      } else {
+        res
+          .send(SendResponse(true, updateResult, "Updated Successfully"))
+          .status(200);
+      }
+    }
+  } catch (e) {
+    res.send(SendResponse(false, null, "Error")).status(400);
+  }
 });
 
-route.delete("/:id", (req, res) => {
-  res.send("Delete student data");
+route.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await studentModel.findById(id);
+    if (!result) {
+      res.send(SendResponse(false, null, "Data Not Found!")).status(400);
+    } else {
+      let delResult = await studentModel.findByIdAndDelete(id);
+      if(!delResult){
+        res.send(SendResponse(false, null, "Error")).status(404)
+      } else {
+        res.send(SendResponse(true, null, "Deleted Successfully")).status(200);
+      }
+    }
+  } catch (e) {
+    res.send(SendResponse(false, null, "No Data On This ID")).status(404)
+  }
 });
 
 module.exports = route;
