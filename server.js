@@ -1,9 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
+
 app.use(express.json())
 require("dotenv").config();
 app.use(cors())
+
 const StudentRoute = require("./routes/studentRoute")
 app.use("/api/student", StudentRoute)
 
@@ -20,7 +22,7 @@ const UserRoute = require("./routes/userRoute");
 app.use("/api/user", UserRoute);
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI3)
 .then(() => {
     app.listen(process.env.PORT,() => {
         console.log("Database connected successfully and Server is listening on port 5000")
