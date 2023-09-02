@@ -22,7 +22,7 @@ const UserRoute = require("./routes/userRoute");
 app.use("/api/user", UserRoute);
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URI3)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     app.listen(process.env.PORT,() => {
         console.log("Database connected successfully and Server is listening on port 5000")
